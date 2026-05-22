@@ -265,6 +265,10 @@ export default function Viewer() {
         WebkitUserSelect: 'none',
         touchAction: 'none',
         WebkitTapHighlightColor: 'transparent',
+        overflow: 'hidden',
+        position: 'fixed',
+        top: 0,
+        left: 0,
       }}
     />
   );
