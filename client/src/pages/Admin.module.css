@@ -1,0 +1,330 @@
+.admin {
+  min-height: 100vh;
+  background: #080810;
+  color: #e2e2f0;
+  padding: 16px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 20px;
+  border-bottom: 1px solid #1c1c30;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #f0c060 0%, #ff69b4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: #8888aa;
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Sections */
+.section {
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555570;
+  margin-bottom: 12px;
+}
+
+/* Grille couleurs */
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.colorBtn {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.15s;
+  outline: none;
+  padding: 0;
+}
+
+.colorBtn:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.colorActive {
+  box-shadow: 0 0 0 2px #fff, 0 0 14px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Couleur perso */
+.customRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.colorPicker {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 2px;
+  background: none;
+  flex-shrink: 0;
+}
+
+.hexInput {
+  background: #13132a;
+  border: 1px solid #252540;
+  border-radius: 8px;
+  color: #e2e2f0;
+  padding: 10px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.88rem;
+  width: 96px;
+}
+
+.hexInput:focus {
+  outline: none;
+  border-color: #5b4aee;
+}
+
+.colorPreview {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  border: 1px solid #252540;
+  flex-shrink: 0;
+}
+
+.applyBtn {
+  background: #13132a;
+  border: 1px solid #252540;
+  border-radius: 8px;
+  color: #e2e2f0;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.83rem;
+  transition: background 0.15s;
+}
+
+.applyBtn:hover {
+  background: #1e1e3a;
+}
+
+/* Vitesse */
+.speedRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.sliderLabel {
+  font-size: 0.82rem;
+  color: #8888aa;
+  min-width: 80px;
+}
+
+.slider {
+  flex: 1;
+  accent-color: #5b4aee;
+  cursor: pointer;
+}
+
+/* Grille effets */
+.effectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.effectBtn {
+  background: #13132a;
+  border: 1px solid #252540;
+  border-radius: 10px;
+  color: #e2e2f0;
+  padding: 12px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s, border-color 0.15s;
+  min-height: 72px;
+  justify-content: center;
+}
+
+.effectBtn:hover {
+  background: #1a1a38;
+}
+
+.effectActive {
+  background: #28116a !important;
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.35);
+}
+
+.effectEmoji {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.effectLabel {
+  font-size: 0.68rem;
+  color: #9090b8;
+  text-align: center;
+}
+
+.stopBtn {
+  margin-top: 10px;
+  width: 100%;
+  background: #2a1212;
+  border: 1px solid #7f1d1d;
+  border-radius: 8px;
+  color: #fca5a5;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.83rem;
+  transition: background 0.15s;
+}
+
+.stopBtn:hover {
+  background: #381818;
+}
+
+/* Moments spéciaux */
+.momentsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.momentBtn {
+  background: #13132a;
+  border: 1px solid #252540;
+  border-radius: 10px;
+  color: #e2e2f0;
+  padding: 16px 10px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.15s, transform 0.1s;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.momentBtn:hover {
+  background: #1a1a38;
+  transform: scale(1.02);
+}
+
+.momentBtn:active {
+  transform: scale(0.97);
+}
+
+.finBtn {
+  background: #170d0d;
+  border-color: #4a1515;
+  color: #f87171;
+}
+
+.finBtn:hover {
+  background: #221010;
+}
+
+/* QR Code */
+.qrBox {
+  background: #13132a;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.qrUrl {
+  font-size: 0.75rem;
+  color: #555570;
+  font-family: monospace;
+  word-break: break-all;
+  text-align: center;
+}
+
+.qrFullBtn {
+  background: #1e1e3a;
+  border: 1px solid #252540;
+  border-radius: 8px;
+  color: #e2e2f0;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: background 0.15s;
+}
+
+.qrFullBtn:hover {
+  background: #26264a;
+}
+
+/* Modal QR plein écran */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.qrUrlLarge {
+  font-size: 1rem;
+  color: #aaaacc;
+  font-family: monospace;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.tapClose {
+  font-size: 0.85rem;
+  color: #444466;
+}
