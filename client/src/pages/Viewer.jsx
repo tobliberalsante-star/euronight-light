@@ -128,8 +128,12 @@ function getEffectColor(effect, t, phase, speed, baseColor) {
 
 export default function Viewer() {
   const [bgColor, setBgColor] = useState('#000000');
+  const [brightness, setBrightness] = useState(1);
   const [isFlashing, setIsFlashing] = useState(false);
   const [showTap, setShowTap] = useState(true);
+
+  const isIOSChrome = /CriOS/i.test(navigator.userAgent);
+  const [showSafariMsg, setShowSafariMsg] = useState(isIOSChrome);
 
   const stateRef = useRef({
     color: '#000000',
@@ -174,8 +178,9 @@ export default function Viewer() {
     socket.on('connect', onConnect);
 
     socket.on('init_state', ({ color, effect, speed, brightness: b }) => {
-      stateRef.current.color = color || '#ffffff';
+      stateRef.current.color = color || '#000000';
       stateRef.current.speed = speed ?? 5;
+      setBrightness(b ?? 1);
       if (effect) {
         stateRef.current.effect = effect;
         stateRef.current.effectStartTime = Date.now();
@@ -207,8 +212,8 @@ export default function Viewer() {
       setTimeout(() => setIsFlashing(false), 120);
     });
 
-    socket.on('brightness_update', () => {
-      // luminosité toujours à 100% côté viewer
+    socket.on('brightness_update', ({ value }) => {
+      setBrightness(value);
     });
 
     return () => {
@@ -284,6 +289,34 @@ export default function Viewer() {
             letterSpacing: '0.05em',
           }}>
             Touche l'écran
+          </span>
+        </div>
+      )}
+
+      {showSafariMsg && (
+        <div
+          onClick={(e) => { e.stopPropagation(); setShowSafariMsg(false); }}
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            background: 'rgba(0,0,0,0.85)',
+            color: '#fff',
+            fontFamily: 'sans-serif',
+            fontSize: '0.9rem',
+            padding: '16px 20px',
+            textAlign: 'center',
+            lineHeight: 1.5,
+            borderTop: '1px solid rgba(255,255,255,0.15)',
+            zIndex: 10,
+          }}
+        >
+          Pour un affichage plein écran, ouvre ce lien dans <strong>Safari</strong> puis
+          "Partager → Sur l'écran d'accueil"
+          <br />
+          <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)' }}>
+            Touche ici pour fermer
           </span>
         </div>
       )}
