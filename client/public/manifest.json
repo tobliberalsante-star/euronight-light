@@ -5,5 +5,7 @@
   "background_color": "#000000",
   "theme_color": "#000000",
   "start_url": "/",
-  "icons": []
+  "icons": [
+    { "src": "/logo.png", "sizes": "any", "type": "image/png", "purpose": "any maskable" }
+  ]
 }
