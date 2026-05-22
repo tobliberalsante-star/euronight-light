@@ -158,7 +158,7 @@ export default function Admin() {
   return (
     <div className={styles.admin}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Euronight Light</h1>
+        <img src="/logo.png" alt="Euronight Animation" className={styles.logo} />
         <div className={styles.live}>
           <span className={styles.liveDot} />
           <span>LIVE — {viewerCount} connecté{viewerCount !== 1 ? 's' : ''}</span>
