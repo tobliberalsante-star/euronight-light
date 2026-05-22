@@ -14,7 +14,7 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3001;
 
 let state = {
-  color: '#ffffff',
+  color: '#000000',
   effect: null,
   speed: 5,
   brightness: 1,
