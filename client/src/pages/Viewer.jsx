@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import NoSleep from 'nosleep.js';
 import socket from '../socket';
+
+const noSleep = new NoSleep();
 
 function hexToRgb(hex) {
   if (!hex || !/^#[0-9a-fA-F]{6}$/.test(hex)) return { r: 255, g: 255, b: 255 };
@@ -227,29 +230,10 @@ export default function Viewer() {
     };
   }, []);
 
-  // Wake Lock API
-  useEffect(() => {
-    let wakeLock = null;
-    const request = async () => {
-      try {
-        if ('wakeLock' in navigator) {
-          wakeLock = await navigator.wakeLock.request('screen');
-        }
-      } catch (_) {}
-    };
-    request();
-    const onVisibility = () => {
-      if (document.visibilityState === 'visible') request();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-    return () => {
-      document.removeEventListener('visibilitychange', onVisibility);
-      wakeLock?.release();
-    };
-  }, []);
 
   const handleClick = () => {
     setShowTap(false);
+    noSleep.enable();
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen?.().catch(() => {});
     }
