@@ -128,8 +128,8 @@ function getEffectColor(effect, t, phase, speed, baseColor) {
 
 export default function Viewer() {
   const [bgColor, setBgColor] = useState('#000000');
-  const [brightness, setBrightness] = useState(1);
   const [isFlashing, setIsFlashing] = useState(false);
+  const [showTap, setShowTap] = useState(true);
 
   const stateRef = useRef({
     color: '#000000',
@@ -176,8 +176,6 @@ export default function Viewer() {
     socket.on('init_state', ({ color, effect, speed, brightness: b }) => {
       stateRef.current.color = color || '#ffffff';
       stateRef.current.speed = speed ?? 5;
-      stateRef.current.brightness = b ?? 1;
-      setBrightness(b ?? 1);
       if (effect) {
         stateRef.current.effect = effect;
         stateRef.current.effectStartTime = Date.now();
@@ -209,9 +207,8 @@ export default function Viewer() {
       setTimeout(() => setIsFlashing(false), 120);
     });
 
-    socket.on('brightness_update', ({ value }) => {
-      stateRef.current.brightness = value;
-      setBrightness(value);
+    socket.on('brightness_update', () => {
+      // luminosité toujours à 100% côté viewer
     });
 
     return () => {
@@ -247,6 +244,7 @@ export default function Viewer() {
   }, []);
 
   const handleClick = () => {
+    setShowTap(false);
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen?.().catch(() => {});
     }
@@ -259,7 +257,6 @@ export default function Viewer() {
         width: '100vw',
         height: '100dvh',
         backgroundColor: isFlashing ? '#ffffff' : bgColor,
-        filter: `brightness(${brightness})`,
         cursor: 'none',
         userSelect: 'none',
         WebkitUserSelect: 'none',
@@ -270,6 +267,26 @@ export default function Viewer() {
         top: 0,
         left: 0,
       }}
-    />
+    >
+      {showTap && (
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          pointerEvents: 'none',
+        }}>
+          <span style={{
+            color: 'rgba(255,255,255,0.35)',
+            fontSize: '1.1rem',
+            fontFamily: 'sans-serif',
+            letterSpacing: '0.05em',
+          }}>
+            Touche l'écran
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
